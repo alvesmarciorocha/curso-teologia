@@ -229,6 +229,31 @@ main{ max-width: 900px; margin: 0 auto; padding: 0 24px 96px; position: relative
 
 .footnote{ font-size: 13px; color: var(--muted); margin-top: 8px; }
 
+/* ---------- bible verse preview ---------- */
+.verse-ref{
+  cursor: help; border-bottom: 1px dotted var(--gold-dim); border-radius: 2px;
+}
+.verse-ref:hover, .verse-ref:focus-visible{ color: var(--gold-soft); border-color: var(--gold-soft); outline: none; }
+.verse-tooltip{
+  position: fixed; z-index: 100; max-width: 300px; max-height: 260px; overflow-y: auto;
+  background: var(--ink-2); border: 1px solid var(--border-strong); border-radius: 10px;
+  padding: 14px 16px; box-shadow: 0 20px 44px -16px rgba(51,44,34,0.4);
+  font-size: 14.5px; line-height: 1.55; color: var(--cream);
+  opacity: 0; transform: translateY(4px); pointer-events: none; transition: opacity 0.15s ease, transform 0.15s ease;
+}
+.verse-tooltip.show{ opacity: 1; transform: translateY(0); }
+.verse-tooltip.below{ transform: translateY(-4px); }
+.verse-tooltip.below.show{ transform: translateY(0); }
+.verse-tooltip .vt-ref{
+  font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--gold-soft); display: block; margin-bottom: 6px;
+}
+.verse-tooltip .vt-text{ margin: 0; font-family: 'Source Serif 4', Georgia, serif; }
+.verse-tooltip .vt-loading, .verse-tooltip .vt-error{ color: var(--muted); font-style: italic; }
+@media (prefers-reduced-motion: reduce){
+  .verse-tooltip{ transition: opacity 0.01s linear; transform: none !important; }
+}
+
 /* ---------- scroll-to-top ---------- */
 .top-link{
   position: fixed; bottom: 24px; right: 24px; z-index: 40;
