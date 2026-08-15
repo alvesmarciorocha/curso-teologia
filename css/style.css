@@ -92,6 +92,10 @@ main{ max-width: 900px; margin: 0 auto; padding: 0 24px 96px; position: relative
 .site-footer{ border-top: 1px solid var(--border); padding: 40px 24px 56px; text-align: center; position: relative; }
 .site-footer p{ margin: 0; }
 .footer-flourish{ width: 120px; height: 14px; margin: 0 auto 18px; opacity: 0.8; }
+.ibc-tag{
+  font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--muted); margin-top: 8px !important;
+}
 
 /* ---------- index hero ---------- */
 .index-hero{ text-align: center; padding: 72px 0 48px; }
@@ -120,15 +124,16 @@ main{ max-width: 900px; margin: 0 auto; padding: 0 24px 96px; position: relative
 
 /* ---------- topic links inside an aula card ---------- */
 .aula-topics{
-  list-style: none; display: flex; flex-wrap: wrap; gap: 8px 18px;
-  margin: 18px 0 0; padding: 14px 0 0; border-top: 1px solid var(--border);
-  position: relative; z-index: 2;
+  list-style: none; display: flex; flex-wrap: wrap; align-items: center;
+  gap: 5px 0; margin: 12px 0 0; padding: 0; position: relative; z-index: 2;
 }
+.aula-topics li{ display: flex; align-items: center; }
+.aula-topics li + li::before{ content: "\00b7"; color: var(--border-strong); margin: 0 9px; font-size: 12px; }
 .aula-topics a{
-  font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.02em;
-  color: var(--cream-dim); border-bottom: 1px dashed var(--border-strong);
+  font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.02em;
+  color: var(--muted); border: none; line-height: 1.4;
 }
-.aula-topics a:hover{ color: var(--gold-soft); border-color: var(--gold-soft); }
+.aula-topics a:hover{ color: var(--gold-soft); }
 
 /* ---------- lecture header ---------- */
 .lecture-header{ padding: 56px 0 48px; text-align: center; }
