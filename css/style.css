@@ -111,11 +111,24 @@ main{ max-width: 900px; margin: 0 auto; padding: 0 24px 96px; position: relative
 }
 .aula-card::before{ content: ""; position: absolute; top: 0; left: 0; width: 3px; height: 100%; background: linear-gradient(var(--gold), var(--lapis)); opacity: 0.8; }
 .aula-card:hover{ transform: translateY(-3px); border-color: var(--border-strong); box-shadow: 0 16px 36px -18px rgba(169,121,30,0.4); }
+.aula-card-link{ display: block; border: none; color: inherit; position: relative; }
 .aula-card .aula-date{ font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.08em; color: var(--gold-soft); }
 .aula-card h2{ font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 28px; margin: 8px 0 8px; color: var(--cream); }
 .aula-card p{ margin: 0; color: var(--cream-dim); font-size: 15px; }
-.aula-card .go{ position: absolute; right: 26px; top: 50%; transform: translateY(-50%); color: var(--muted); font-size: 20px; transition: transform 0.25s ease, color 0.25s ease; }
+.aula-card .go{ position: absolute; right: 0; top: 50%; transform: translateY(-50%); color: var(--muted); font-size: 20px; transition: transform 0.25s ease, color 0.25s ease; }
 .aula-card:hover .go{ transform: translate(4px,-50%); color: var(--gold-soft); }
+
+/* ---------- topic links inside an aula card ---------- */
+.aula-topics{
+  list-style: none; display: flex; flex-wrap: wrap; gap: 8px 18px;
+  margin: 18px 0 0; padding: 14px 0 0; border-top: 1px solid var(--border);
+  position: relative; z-index: 2;
+}
+.aula-topics a{
+  font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.02em;
+  color: var(--cream-dim); border-bottom: 1px dashed var(--border-strong);
+}
+.aula-topics a:hover{ color: var(--gold-soft); border-color: var(--gold-soft); }
 
 /* ---------- lecture header ---------- */
 .lecture-header{ padding: 56px 0 48px; text-align: center; }
@@ -123,13 +136,18 @@ main{ max-width: 900px; margin: 0 auto; padding: 0 24px 96px; position: relative
 .lecture-header h1{ font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 44px; line-height: 1.1; margin: 8px 0 0; color: var(--cream); }
 
 /* ---------- TOC dot nav ---------- */
-.toc{ position: fixed; right: 26px; top: 50%; transform: translateY(-50%); z-index: 40; display: flex; flex-direction: column; gap: 18px; }
+.toc{ position: fixed; right: 26px; top: 50%; transform: translateY(-50%); z-index: 40; display: flex; flex-direction: column; gap: 16px; }
 .toc a{ display: flex; align-items: center; gap: 10px; border: none; }
-.toc .dot{ width: 9px; height: 9px; border-radius: 50%; border: 1.5px solid var(--border-strong); background: var(--ink-2); transition: all 0.25s ease; }
-.toc .label{ font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); opacity: 0; transform: translateX(-6px); transition: all 0.25s ease; white-space: nowrap; }
-.toc a:hover .label, .toc a.active .label{ opacity: 1; transform: translateX(0); color: var(--gold-soft); }
+.toc .dot{ width: 9px; height: 9px; border-radius: 50%; border: 1.5px solid var(--border-strong); background: var(--ink-2); transition: all 0.25s ease; flex-shrink: 0; }
+.toc .label{
+  font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--muted); white-space: nowrap; transition: all 0.25s ease;
+  padding: 4px 10px; border-radius: 20px; border: 1px solid transparent;
+}
+.toc a:hover .label{ color: var(--gold-soft); }
+.toc a.active .label{ color: var(--gold-soft); font-weight: 600; background: var(--ink-2); border-color: var(--gold-dim); box-shadow: 0 2px 8px -4px rgba(169,121,30,0.35); }
 .toc a.active .dot{ background: var(--gold); border-color: var(--gold); box-shadow: 0 0 8px var(--gold-dim); }
-@media (max-width: 900px){ .toc{ display: none; } }
+@media (max-width: 1180px){ .toc{ display: none; } }
 
 /* ---------- section blocks ---------- */
 .section{ position: relative; padding-top: 8px; margin-bottom: 76px; scroll-margin-top: 30px; }
