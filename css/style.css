@@ -92,10 +92,6 @@ main{ max-width: 900px; margin: 0 auto; padding: 0 24px 96px; position: relative
 .site-footer{ border-top: 1px solid var(--border); padding: 40px 24px 56px; text-align: center; position: relative; }
 .site-footer p{ margin: 0; }
 .footer-flourish{ width: 120px; height: 14px; margin: 0 auto 18px; opacity: 0.8; }
-.ibc-tag{
-  font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase;
-  color: var(--muted); margin-top: 8px !important;
-}
 
 /* ---------- index hero ---------- */
 .index-hero{ text-align: center; padding: 72px 0 48px; }
