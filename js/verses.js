@@ -42,8 +42,21 @@
     return 'https://bible-api.com/' + encodeURIComponent(loc) + '?translation=almeida';
   }
 
+  /* referência por extenso para exibição, ex.: "Números 1.50" (a citação abreviada
+     no texto da página, ex. "Nm 1.50", continua sendo o padrão de escrita) */
+  function formatFullRef(ref){
+    var loc = ref.book + ' ' + ref.chapter;
+    if(ref.verse){ loc += '.' + ref.verse; if(ref.end) loc += '-' + ref.end; }
+    return loc;
+  }
+
   function fetchVerse(raw, cb){
-    if(cache[raw]){ cb(null, cache[raw]); return; }
+    if(cache[raw]){
+      var cached = cache[raw];
+      if(typeof cached === 'string'){ cb(null, { text: cached, translation: 'João Ferreira de Almeida' }); }
+      else { cb(null, cached); }
+      return;
+    }
     var ref = parseRef(raw);
     if(!ref){ cb('unparseable'); return; }
     fetch(apiUrl(ref)).then(function(res){
@@ -53,9 +66,10 @@
       if(!data || !data.text){ cb('empty'); return; }
       var text = data.text.replace(/\s+/g, ' ').trim();
       if(text.length > 480){ text = text.slice(0, 470).replace(/\s+\S*$/, '') + '…'; }
-      cache[raw] = text;
+      var entry = { text: text, translation: data.translation_name || 'João Ferreira de Almeida' };
+      cache[raw] = entry;
       saveCache();
-      cb(null, text);
+      cb(null, entry);
     }).catch(function(){ cb('network'); });
   }
 
@@ -88,19 +102,21 @@
   function renderError(refText){
     tip.innerHTML = '<span class="vt-ref">' + refText + '</span><span class="vt-error">não foi possível carregar o texto agora.</span>';
   }
-  function renderVerse(refText, text){
-    tip.innerHTML = '<span class="vt-ref">' + refText + '</span><p class="vt-text">“' + text + '”</p>';
+  function renderVerse(refText, text, translation){
+    tip.innerHTML = '<span class="vt-ref">' + refText + '</span><p class="vt-text">“' + text + '”</p><span class="vt-version">' + translation + '</span>';
   }
 
   function openTip(el){
     activeEl = el;
-    var refText = el.getAttribute('data-ref');
+    var rawRef = el.getAttribute('data-ref');
+    var parsed = parseRef(rawRef);
+    var displayRef = parsed ? formatFullRef(parsed) : rawRef;
     renderLoading();
     tip.classList.add('show');
     positionTip(el);
-    fetchVerse(refText, function(err, text){
+    fetchVerse(rawRef, function(err, data){
       if(activeEl !== el) return; /* user moved on before the fetch finished */
-      if(err){ renderError(refText); } else { renderVerse(refText, text); }
+      if(err){ renderError(displayRef); } else { renderVerse(displayRef, data.text, data.translation); }
       positionTip(el);
     });
   }
