@@ -169,6 +169,8 @@ main{ max-width: 900px; margin: 0 auto; padding: 0 24px 96px; position: relative
   display: inline-flex; align-items: center; gap: 6px;
 }
 .chip:hover{ background: #f7ecd2; transform: translateY(-2px); box-shadow: 0 8px 18px -10px var(--gold-dim); color: var(--gold-soft); border-color: var(--gold); }
+.chip.static{ cursor: default; }
+.chip.static:hover{ background: var(--ink-2); transform: none; box-shadow: none; border-color: var(--border-strong); }
 .chip-group-label{ font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--cream-dim); margin: 24px 0 10px; display: flex; align-items: center; gap: 8px; }
 .chip-group-label:first-child{ margin-top: 0; }
 .chip-group-label .dot{ width: 6px; height: 6px; border-radius: 50%; background: var(--gold); }
