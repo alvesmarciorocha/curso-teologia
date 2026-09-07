@@ -21,7 +21,7 @@ aulas/                 → uma página HTML por aula, mais uma página "-quiz.ht
 2. Edite o `<title>` e o conteúdo do novo arquivo com as anotações da aula.
    - Dica: você pode pedir para o Claude gerar o HTML da nova aula no mesmo estilo do arquivo anterior — é só colar as suas anotações e pedir "gere uma página no mesmo formato das outras aulas".
 3. Toda aula tem um quiz — peça ao Claude para gerar `AAAA-MM-DD-titulo-da-aula-quiz.html` junto (isso já está nas instruções do projeto, não precisa nem pedir). São de 7 a 10 perguntas de múltipla escolha com correção e nota ao final, usando o motor genérico em `js/quiz.js`.
-4. Abra `index.html` e adicione um novo `<li>` dentro de `<ul class="aula-list">`, copiando o bloco de um cartão existente e ajustando data, módulo, título, o link `href="aulas/seu-novo-arquivo.html"` e o link do quiz.
+4. Abra `index.html` e adicione um novo `<li>` na `<ol class="module-aulas">` do módulo certo, na ordem cronológica do curso — copie um `<li>` existente e ajuste `.aula-seq` (numeração dentro do módulo), título, data, `.aula-topics` e os links da aula e do quiz. Atualize também o `.module-count` ("N aulas") e a linha de descrição do módulo. O Claude já faz tudo isso pelas instruções do projeto (`CLAUDE.md` → "Índice por módulo").
 5. Salve, publique (veja abaixo) e confira o site no ar.
 
 ## Como publicar as atualizações no GitHub Pages

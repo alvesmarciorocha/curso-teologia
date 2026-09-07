@@ -102,21 +102,58 @@ main{ max-width: 900px; margin: 0 auto; padding: 0 24px 96px; position: relative
 .section-tag{ font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold-soft); display: inline-block; margin-bottom: 8px; }
 
 .aula-list{ list-style: none; margin: 0 0 40px; padding: 0; display: flex; flex-direction: column; gap: 14px; }
+
+/* ---------- index: módulos ---------- */
+.module-nav{ margin-bottom: 40px; justify-content: center; }
+
+.module-block{ margin-bottom: 58px; scroll-margin-top: 30px; }
+.module-block:last-child{ margin-bottom: 24px; }
+.module-head{ display: flex; gap: 15px; align-items: flex-start; padding-bottom: 16px; border-bottom: 1px solid var(--gold-dim); }
+.module-num{
+  font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 600; font-size: 18px;
+  color: var(--gold-soft); border: 1px solid var(--border-strong); border-radius: 50%;
+  width: 38px; height: 38px; display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; background: var(--ink-2);
+}
+.module-head-text{ flex: 1; min-width: 0; }
+.module-head-top{ display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+.module-head h2{ font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 30px; line-height: 1.15; margin: 0; color: var(--cream); }
+.module-count{ font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
+.module-head-text > p{ margin: 6px 0 0; color: var(--cream-dim); font-size: 14.5px; line-height: 1.6; max-width: 62ch; }
+
+.module-aulas{ list-style: none; margin: 22px 0 0 15px; padding: 0 0 0 22px; display: flex; flex-direction: column; gap: 14px; border-left: 1px solid var(--gold-dim); }
+.module-aulas > li{ position: relative; }
+
 .aula-card{
   display: block; position: relative; overflow: hidden;
   border: 1px solid var(--border); border-radius: 10px;
-  padding: 26px 28px; background: var(--ink-2);
+  padding: 24px 26px; background: var(--ink-2);
   box-shadow: 0 1px 2px rgba(51,44,34,0.04);
   transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
 }
 .aula-card::before{ content: ""; position: absolute; top: 0; left: 0; width: 3px; height: 100%; background: linear-gradient(var(--gold), var(--lapis)); opacity: 0.8; }
 .aula-card:hover{ transform: translateY(-3px); border-color: var(--border-strong); box-shadow: 0 16px 36px -18px rgba(169,121,30,0.4); }
-.aula-card-link{ display: block; border: none; color: inherit; position: relative; }
-.aula-card .aula-date{ font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.08em; color: var(--gold-soft); }
-.aula-card h2{ font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 28px; margin: 8px 0 8px; color: var(--cream); }
+.aula-seq{
+  position: absolute; left: -33px; top: 22px; z-index: 3;
+  width: 22px; height: 22px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'IBM Plex Mono', monospace; font-size: 11px;
+  color: var(--gold-soft); background: var(--ink); border: 1px solid var(--gold-dim);
+}
+.aula-card-link{ display: block; border: none; color: inherit; position: relative; padding-right: 22px; }
+.aula-card-top{ display: flex; align-items: baseline; justify-content: space-between; gap: 14px; margin-bottom: 8px; }
+.aula-card h3{ font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 26px; line-height: 1.15; margin: 0; color: var(--cream); }
+.aula-card .aula-date{ font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.06em; color: var(--muted); white-space: nowrap; flex-shrink: 0; }
 .aula-card p{ margin: 0; color: var(--cream-dim); font-size: 15px; }
 .aula-card .go{ position: absolute; right: 0; top: 50%; transform: translateY(-50%); color: var(--muted); font-size: 20px; transition: transform 0.25s ease, color 0.25s ease; }
 .aula-card:hover .go{ transform: translate(4px,-50%); color: var(--gold-soft); }
+
+@media (max-width: 640px){
+  .module-aulas{ margin-left: 8px; padding-left: 18px; }
+  .aula-seq{ left: -27px; width: 20px; height: 20px; }
+  .aula-card-top{ flex-direction: column; gap: 2px; }
+  .module-head h2{ font-size: 26px; }
+}
 
 /* ---------- topic links inside an aula card ---------- */
 .aula-topics{
@@ -509,29 +546,6 @@ main{ max-width: 900px; margin: 0 auto; padding: 0 24px 96px; position: relative
 .daccent-title{ font-family: 'Cormorant Garamond', serif; font-weight: 700; fill: var(--gold-soft); }
 .daccent-label{ font-family: 'Source Serif 4', Georgia, serif; fill: var(--gold-soft); font-weight: 600; }
 .ddiamond-box{ fill: var(--ink-2); stroke: var(--muted); stroke-width: 1.4; }
-
-/* ---------- Escudo da Trindade (Scutum Fidei) ---------- */
-.tri-line-affirm{ stroke: var(--gold); stroke-width: 1.7; fill: none; }
-.tri-line-deny{ stroke: var(--border-strong); stroke-width: 1.4; fill: none; stroke-dasharray: 5 4; }
-.tri-label-affirm{ font-family: 'IBM Plex Mono', monospace; fill: var(--gold-soft); font-weight: 600; }
-.tri-label-deny{ font-family: 'IBM Plex Mono', monospace; fill: var(--muted); }
-.tri-label-bg{ fill: var(--ink-2); }
-
-/* ---------- tabela de doutrina (ex.: afirmações x erros) ---------- */
-.doctrine-table{ overflow-x: auto; margin: 8px 0 28px; border: 1px solid var(--border); border-radius: 10px; background: var(--ink-2); }
-.doctrine-table table{ border-collapse: collapse; width: 100%; min-width: 540px; }
-.doctrine-table th, .doctrine-table td{ text-align: left; padding: 13px 16px; border-bottom: 1px solid var(--border); vertical-align: top; }
-.doctrine-table tbody tr:last-child th, .doctrine-table tbody tr:last-child td{ border-bottom: none; }
-.doctrine-table thead th{ font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.13em; text-transform: uppercase; color: var(--muted); font-weight: 400; background: var(--ink-3); }
-.doctrine-table tbody th{ font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 18px; color: var(--cream); width: 32%; }
-.doctrine-table td{ color: var(--cream); font-size: 14.5px; line-height: 1.55; }
-.doctrine-table .dt-error{ color: var(--wine-soft); font-weight: 600; }
-.doctrine-table .verse-ref{ font-family: 'IBM Plex Mono', monospace; font-size: 12px; white-space: nowrap; }
-
-/* ---------- lista simples com marcador dourado ---------- */
-.plain-list{ margin: 0 0 24px; padding: 0; list-style: none; }
-.plain-list li{ position: relative; padding-left: 20px; margin: 0 0 12px; color: var(--cream); font-size: 15.5px; line-height: 1.6; }
-.plain-list li::before{ content: ""; position: absolute; left: 2px; top: 10px; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); }
 
 /* ---------- guia de leitura numerado (ex.: como ler o diagrama) ---------- */
 .diagram-notes{ display: flex; flex-direction: column; gap: 22px; margin: 8px 0 8px; }

@@ -23,14 +23,44 @@ Checklist ao adicionar/editar uma aula:
      <a class="quiz-callout-btn" href="AAAA-MM-DD-titulo-da-aula-quiz.html">Fazer o quiz &rarr;</a>
    </div>
    ```
-4. Adicionar, no card da aula em `index.html` (dentro de `.aula-card`, depois de `.aula-topics`), o link:
-   ```html
-   <a class="aula-quiz-link" href="aulas/AAAA-MM-DD-titulo-da-aula-quiz.html">Fazer o quiz &rarr;</a>
-   ```
+4. Adicionar o card da aula em `index.html` conforme a seção "Índice por módulo" abaixo — o card já inclui o link do quiz (`<a class="aula-quiz-link" ...>` depois de `.aula-topics`).
 
 O motor do quiz (`js/quiz.js`) e os estilos (`.quiz-*` em `css/style.css`) já existem e são genéricos — não precisam ser recriados, só reaproveitados. Use como referência os quizzes já publicados:
 - `aulas/2026-08-13-doutrina-de-deus-quiz.html`
 - `aulas/2026-08-20-fundamentos-do-ministerio-quiz.html`
+
+## Índice por módulo (`index.html`)
+
+O índice **não é uma lista por data** — é agrupado por módulo (aprovado em 2026-09-07). Cada `<section class="module-block" id="modulo-N">` tem um `.module-head` (numeral romano em `.module-num`, `<h2>Módulo N</h2>`, `.module-count` com "N aulas" e uma linha de descrição curta) e uma `<ol class="module-aulas">` com um `<li>` por aula, **em ordem do curso** (cronológica crescente), cada card com `.aula-seq` numerado a partir de 1 dentro do módulo. Os chips de âncora no topo (`.chip-row.module-nav`) têm um `<a class="chip" href="#modulo-N">` por módulo.
+
+Ao adicionar uma aula, no `index.html`:
+
+1. **Colocar o card no `module-block` do módulo certo**, na posição cronológica correta dentro da `<ol class="module-aulas">`, e renumerar os `.aula-seq` daquele módulo se a aula não entrou por último. Modelo do card (copiar de um `<li>` existente):
+   ```html
+   <li class="reveal">
+     <div class="aula-card">
+       <span class="aula-seq" aria-hidden="true">N</span>
+       <a class="aula-card-link" href="aulas/AAAA-MM-DD-titulo-da-aula.html">
+         <div class="aula-card-top">
+           <h3>Título da Aula</h3>
+           <span class="aula-date">DD mmm AAAA</span>
+         </div>
+         <p>Resumo de uma frase da aula.</p>
+         <span class="go" aria-hidden="true">&rarr;</span>
+       </a>
+       <ul class="aula-topics">
+         <li><a href="aulas/AAAA-MM-DD-titulo-da-aula.html#ancora">Tópico</a></li>
+         <!-- ... uma entrada por seção principal ... -->
+       </ul>
+       <a class="aula-quiz-link" href="aulas/AAAA-MM-DD-titulo-da-aula-quiz.html">Fazer o quiz &rarr;</a>
+     </div>
+   </li>
+   ```
+2. **Atualizar o `.module-count`** daquele módulo ("N aulas").
+3. **Rever e ajustar a linha de descrição do módulo** (`.module-head-text > p`) — essas linhas foram redigidas por mim (Claude) e devem ser reanalisadas a cada aula nova, para continuarem cobrindo o que o módulo passou a abranger. Manter **uma linha, curta** (≈10–16 palavras): é um rótulo de módulo, não um resumo; nada de texto longo nem de listar todas as aulas.
+4. **Módulo novo**: se a aula for de um módulo que ainda não existe no índice, criar um novo `<section class="module-block" id="modulo-N">` (numeral romano em `.module-num`) na ordem crescente e adicionar o `<a class="chip" href="#modulo-N">Módulo N</a>` na `.chip-row.module-nav`.
+
+Os nomes dos módulos são só "Módulo 1", "Módulo 2"... (sem nome temático), iguais aos que aparecem no `.eyebrow` das páginas de aula.
 
 ## Fluxo de criação/edição de aula: validar antes de gerar HTML
 
