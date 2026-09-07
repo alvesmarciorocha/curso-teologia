@@ -42,6 +42,22 @@ Ao criar ou revisar o conteúdo de uma aula (texto/resumo trazido pelo usuário)
 
 Só depois de fechar texto, fidelidade teológica e elementos visuais com o usuário, perguntar se é hora de gerar o HTML da aula (e o quiz correspondente, conforme a regra permanente acima) e publicar no GitHub Pages.
 
+## Regra permanente: toda aula abre com uma Visão geral
+
+Formato padrão dos resumos: conclusão e panorama geral primeiro, desenvolvimento depois — princípio do BLUF (*bottom line up front* / pirâmide invertida), não o caminho inverso de ir construindo até a conclusão no fim. Isso vale por padrão para toda aula nova.
+
+- **Quem escreve a Visão geral sou eu (Claude)**, com base no conteúdo/resumo da aula. Nunca insiro na página sem antes apresentar o conteúdo para validação do usuário — mesmo já tendo a estrutura/CSS prontos, o conteúdo é sempre aprovado antes.
+- **Formato do conteúdo é aberto, não só texto.** Uso o que deixar a conclusão e o panorama mais claros para aquela aula específica — parágrafo corrido, lista, diagrama, fluxograma, linha do tempo etc. — reaproveitando os padrões visuais que já existem no site (`.diagram-card`/SVG, `.hierarchy-stack`, `.bridge-flow`, `.wheel`, `.offices-tree`...) quando um deles se encaixar melhor que texto puro. Se o elemento escolhido for visual/gráfico, segue o fluxo normal de esboço (ver "Trabalho visual" abaixo) antes de implementar.
+- **Avaliar se o padrão faz sentido para a aula em questão.** Se o conteúdo for essencialmente narrativo/histórico ou argumentativo (o "chegar lá" é parte do ensino), avisar o usuário que o formato (b) — explicar até chegar na conclusão — pode servir melhor àquela aula específica, em vez de aplicar o padrão (a) sem questionar.
+- **Marcação e posição**: bloco entre o `.lecture-header` e a primeira `<section>`, usando as classes já definidas em `css/style.css` (`.lecture-overview` + `.lecture-overview-badge` — fundo lapis translúcido com o rótulo em selo, aprovado em 2026-09-07). Exemplo com texto simples (o conteúdo interno muda conforme o formato escolhido para a aula):
+  ```html
+  <div class="lecture-overview reveal">
+    <span class="lecture-overview-badge">Visão geral</span>
+    <p>Texto da visão geral — conclusão + panorama do que a aula cobre.</p>
+  </div>
+  ```
+- Aulas novas ganham o bloco por padrão. Aulas antigas ganham quando forem revisitadas/editadas — não é preciso varrer todas de uma vez como no caso do quiz, a menos que o usuário peça.
+
 ## Trabalho visual: esboço com opções antes de implementar
 
 Ao criar ou reformular algo visual (componente, seção, página, layout, fluxo de telas), apresentar esboço e esperar aprovação antes de implementar — é o default, não esperar que o usuário peça. Conta como reformular também mudar o tratamento visual do que já existe ("deixa mais chamativo", "moderniza isso"), mesmo sem alterar a estrutura.
